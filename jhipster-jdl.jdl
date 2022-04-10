@@ -1,0 +1,33 @@
+
+application {
+  config {
+    baseName portailGestionnaire,
+    applicationType monolith,
+    packageName com.sopra.pfe,
+    authenticationType jwt,
+    prodDatabaseType mysql,
+    clientFramework angular,
+    jhiPrefix sopra,
+    languages	[fr]
+  }
+  entities *
+}
+
+
+entity Rss {
+	titre String required
+	url String required
+    estActive Boolean
+}
+entity Chaine {
+	libelle String required
+    process String required
+}
+entity Anomalie {
+	msgAno String required
+    msgSol String
+}
+relationship OneToMany {
+  Chaine to Anomalie{chaine}
+}
+    

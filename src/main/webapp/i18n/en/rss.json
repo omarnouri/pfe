@@ -1,0 +1,26 @@
+{
+  "portailGestionnaireApp": {
+    "rss": {
+      "home": {
+        "title": "Rsses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Rss",
+        "createOrEditLabel": "Create or edit a Rss",
+        "notFound": "No Rsses found"
+      },
+      "created": "A new Rss is created with identifier {{ param }}",
+      "updated": "A Rss is updated with identifier {{ param }}",
+      "deleted": "A Rss is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Rss {{ id }}?"
+      },
+      "detail": {
+        "title": "Rss"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "url": "Url",
+      "estActive": "Est Active"
+    }
+  }
+}

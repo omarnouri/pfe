@@ -1,0 +1,32 @@
+{
+  "name": "Anomalie",
+  "fields": [
+    {
+      "fieldName": "msgAno",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "msgSol",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "chaine",
+      "otherEntityRelationshipName": "anomalie",
+      "relationshipName": "chaine"
+    }
+  ],
+  "entityTableName": "anomalie",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["portailGestionnaire"],
+  "changelogDate": "20220410142849"
+}

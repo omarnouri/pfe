@@ -1,0 +1,26 @@
+{
+  "portailGestionnaireApp": {
+    "chaine": {
+      "home": {
+        "title": "Chaines",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chaine",
+        "createOrEditLabel": "Create or edit a Chaine",
+        "notFound": "No Chaines found"
+      },
+      "created": "A new Chaine is created with identifier {{ param }}",
+      "updated": "A Chaine is updated with identifier {{ param }}",
+      "deleted": "A Chaine is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chaine {{ id }}?"
+      },
+      "detail": {
+        "title": "Chaine"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "process": "Process",
+      "anomalie": "Anomalie"
+    }
+  }
+}

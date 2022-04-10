@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="anomalie">
+      <h2 data-cy="anomalieDetailsHeading"><span sopraTranslate="portailGestionnaireApp.anomalie.detail.title">Anomalie</span></h2>
+
+      <hr />
+
+      <sopra-alert-error></sopra-alert-error>
+
+      <sopra-alert></sopra-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sopraTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ anomalie.id }}</span>
+        </dd>
+        <dt><span sopraTranslate="portailGestionnaireApp.anomalie.msgAno">Msg Ano</span></dt>
+        <dd>
+          <span>{{ anomalie.msgAno }}</span>
+        </dd>
+        <dt><span sopraTranslate="portailGestionnaireApp.anomalie.msgSol">Msg Sol</span></dt>
+        <dd>
+          <span>{{ anomalie.msgSol }}</span>
+        </dd>
+        <dt><span sopraTranslate="portailGestionnaireApp.anomalie.chaine">Chaine</span></dt>
+        <dd>
+          <div *ngIf="anomalie.chaine">
+            <a [routerLink]="['/chaine', anomalie.chaine?.id, 'view']">{{ anomalie.chaine?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sopraTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/anomalie', anomalie.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sopraTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

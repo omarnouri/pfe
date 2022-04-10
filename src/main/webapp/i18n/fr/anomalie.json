@@ -1,0 +1,26 @@
+{
+  "portailGestionnaireApp": {
+    "anomalie": {
+      "home": {
+        "title": "Anomalies",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Anomalie",
+        "createOrEditLabel": "Créer ou éditer un Anomalie",
+        "notFound": "Aucun Anomalie trouvé"
+      },
+      "created": "Un nouveau Anomalie a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Anomalie avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Anomalie avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Anomalie {{ id }} ?"
+      },
+      "detail": {
+        "title": "Anomalie"
+      },
+      "id": "ID",
+      "msgAno": "Msg Ano",
+      "msgSol": "Msg Sol",
+      "chaine": "Chaine"
+    }
+  }
+}

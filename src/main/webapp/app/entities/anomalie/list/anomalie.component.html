@@ -1,0 +1,86 @@
+<div>
+  <h2 id="page-heading" data-cy="AnomalieHeading">
+    <span sopraTranslate="portailGestionnaireApp.anomalie.home.title">Anomalies</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sopraTranslate="portailGestionnaireApp.anomalie.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-anomalie"
+        [routerLink]="['/anomalie/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sopraTranslate="portailGestionnaireApp.anomalie.home.createLabel"> Create a new Anomalie </span>
+      </button>
+    </div>
+  </h2>
+
+  <sopra-alert-error></sopra-alert-error>
+
+  <sopra-alert></sopra-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="anomalies?.length === 0">
+    <span sopraTranslate="portailGestionnaireApp.anomalie.home.notFound">No anomalies found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="anomalies && anomalies.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span sopraTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span sopraTranslate="portailGestionnaireApp.anomalie.msgAno">Msg Ano</span></th>
+          <th scope="col"><span sopraTranslate="portailGestionnaireApp.anomalie.msgSol">Msg Sol</span></th>
+          <th scope="col"><span sopraTranslate="portailGestionnaireApp.anomalie.chaine">Chaine</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let anomalie of anomalies; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/anomalie', anomalie.id, 'view']">{{ anomalie.id }}</a>
+          </td>
+          <td>{{ anomalie.msgAno }}</td>
+          <td>{{ anomalie.msgSol }}</td>
+          <td>
+            <div *ngIf="anomalie.chaine">
+              <a [routerLink]="['/chaine', anomalie.chaine?.id, 'view']">{{ anomalie.chaine?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/anomalie', anomalie.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sopraTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/anomalie', anomalie.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sopraTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(anomalie)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sopraTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

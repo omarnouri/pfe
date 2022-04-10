@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="rss">
+      <h2 data-cy="rssDetailsHeading"><span sopraTranslate="portailGestionnaireApp.rss.detail.title">Rss</span></h2>
+
+      <hr />
+
+      <sopra-alert-error></sopra-alert-error>
+
+      <sopra-alert></sopra-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sopraTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ rss.id }}</span>
+        </dd>
+        <dt><span sopraTranslate="portailGestionnaireApp.rss.titre">Titre</span></dt>
+        <dd>
+          <span>{{ rss.titre }}</span>
+        </dd>
+        <dt><span sopraTranslate="portailGestionnaireApp.rss.url">Url</span></dt>
+        <dd>
+          <span>{{ rss.url }}</span>
+        </dd>
+        <dt><span sopraTranslate="portailGestionnaireApp.rss.estActive">Est Active</span></dt>
+        <dd>
+          <span>{{ rss.estActive }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sopraTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/rss', rss.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sopraTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

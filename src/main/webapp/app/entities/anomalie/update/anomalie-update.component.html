@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sopra-anomalie-heading"
+        data-cy="AnomalieCreateUpdateHeading"
+        sopraTranslate="portailGestionnaireApp.anomalie.home.createOrEditLabel"
+      >
+        Create or edit a Anomalie
+      </h2>
+
+      <div>
+        <sopra-alert-error></sopra-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" sopraTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" sopraTranslate="portailGestionnaireApp.anomalie.msgAno" for="field_msgAno">Msg Ano</label>
+          <input type="text" class="form-control" name="msgAno" id="field_msgAno" data-cy="msgAno" formControlName="msgAno" />
+          <div *ngIf="editForm.get('msgAno')!.invalid && (editForm.get('msgAno')!.dirty || editForm.get('msgAno')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('msgAno')?.errors?.required"
+              sopraTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" sopraTranslate="portailGestionnaireApp.anomalie.msgSol" for="field_msgSol">Msg Sol</label>
+          <input type="text" class="form-control" name="msgSol" id="field_msgSol" data-cy="msgSol" formControlName="msgSol" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" sopraTranslate="portailGestionnaireApp.anomalie.chaine" for="field_chaine">Chaine</label>
+          <select class="form-control" id="field_chaine" data-cy="chaine" name="chaine" formControlName="chaine">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="chaineOption.id === editForm.get('chaine')!.value?.id ? editForm.get('chaine')!.value : chaineOption"
+              *ngFor="let chaineOption of chainesSharedCollection; trackBy: trackChaineById"
+            >
+              {{ chaineOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sopraTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sopraTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

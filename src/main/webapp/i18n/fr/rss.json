@@ -1,0 +1,26 @@
+{
+  "portailGestionnaireApp": {
+    "rss": {
+      "home": {
+        "title": "Rsses",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Rss",
+        "createOrEditLabel": "Créer ou éditer un Rss",
+        "notFound": "Aucun Rss trouvé"
+      },
+      "created": "Un nouveau Rss a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Rss avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Rss avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Rss {{ id }} ?"
+      },
+      "detail": {
+        "title": "Rss"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "url": "Url",
+      "estActive": "Est Active"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div>
+  <h2>
+    <span id="metrics-page-heading" sopraTranslate="metrics.title" data-cy="metricsPageHeading">Application Metrics</span>
+
+    <button class="btn btn-primary float-right" (click)="refresh()">
+      <fa-icon icon="sync"></fa-icon> <span sopraTranslate="metrics.refresh.button">Refresh</span>
+    </button>
+  </h2>
+
+  <h3 sopraTranslate="metrics.jvm.title">JVM Metrics</h3>
+
+  <div class="row" *ngIf="metrics && !updatingMetrics">
+    <sopra-jvm-memory class="col-md-4" [updating]="updatingMetrics" [jvmMemoryMetrics]="metrics.jvm"></sopra-jvm-memory>
+
+    <sopra-jvm-threads class="col-md-4" [threads]="threads"></sopra-jvm-threads>
+
+    <sopra-metrics-system class="col-md-4" [updating]="updatingMetrics" [systemMetrics]="metrics.processMetrics"></sopra-metrics-system>
+  </div>
+
+  <sopra-metrics-garbagecollector
+    *ngIf="metrics && metricsKeyExists('garbageCollector')"
+    [updating]="updatingMetrics"
+    [garbageCollectorMetrics]="metrics.garbageCollector"
+  ></sopra-metrics-garbagecollector>
+
+  <div class="well well-lg" *ngIf="updatingMetrics" sopraTranslate="metrics.updating">Updating...</div>
+
+  <sopra-metrics-request
+    *ngIf="metrics && metricsKeyExists('http.server.requests')"
+    [updating]="updatingMetrics"
+    [requestMetrics]="metrics['http.server.requests']"
+  ></sopra-metrics-request>
+
+  <sopra-metrics-endpoints-requests
+    *ngIf="metrics && metricsKeyExists('services')"
+    [updating]="updatingMetrics"
+    [endpointsRequestsMetrics]="metrics.services"
+  ></sopra-metrics-endpoints-requests>
+
+  <sopra-metrics-cache
+    *ngIf="metrics && metricsKeyExists('cache')"
+    [updating]="updatingMetrics"
+    [cacheMetrics]="metrics.cache"
+  ></sopra-metrics-cache>
+
+  <sopra-metrics-datasource
+    *ngIf="metrics && metricsKeyExistsAndObjectNotEmpty('databases')"
+    [updating]="updatingMetrics"
+    [datasourceMetrics]="metrics.databases"
+  ></sopra-metrics-datasource>
+</div>

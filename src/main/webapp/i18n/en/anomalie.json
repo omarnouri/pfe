@@ -1,0 +1,26 @@
+{
+  "portailGestionnaireApp": {
+    "anomalie": {
+      "home": {
+        "title": "Anomalies",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Anomalie",
+        "createOrEditLabel": "Create or edit a Anomalie",
+        "notFound": "No Anomalies found"
+      },
+      "created": "A new Anomalie is created with identifier {{ param }}",
+      "updated": "A Anomalie is updated with identifier {{ param }}",
+      "deleted": "A Anomalie is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Anomalie {{ id }}?"
+      },
+      "detail": {
+        "title": "Anomalie"
+      },
+      "id": "ID",
+      "msgAno": "Msg Ano",
+      "msgSol": "Msg Sol",
+      "chaine": "Chaine"
+    }
+  }
+}

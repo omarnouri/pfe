@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="chaine">
+      <h2 data-cy="chaineDetailsHeading"><span sopraTranslate="portailGestionnaireApp.chaine.detail.title">Chaine</span></h2>
+
+      <hr />
+
+      <sopra-alert-error></sopra-alert-error>
+
+      <sopra-alert></sopra-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sopraTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ chaine.id }}</span>
+        </dd>
+        <dt><span sopraTranslate="portailGestionnaireApp.chaine.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ chaine.libelle }}</span>
+        </dd>
+        <dt><span sopraTranslate="portailGestionnaireApp.chaine.process">Process</span></dt>
+        <dd>
+          <span>{{ chaine.process }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sopraTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/chaine', chaine.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sopraTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{
+  "name": "Chaine",
+  "fields": [
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "process",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "anomalie",
+      "otherEntityRelationshipName": "chaine",
+      "relationshipName": "anomalie"
+    }
+  ],
+  "entityTableName": "chaine",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["portailGestionnaire"],
+  "changelogDate": "20220410142749"
+}

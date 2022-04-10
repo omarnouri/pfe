@@ -1,0 +1,70 @@
+<div>
+  <h2 id="page-heading" data-cy="ChaineHeading">
+    <span sopraTranslate="portailGestionnaireApp.chaine.home.title">Chaines</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sopraTranslate="portailGestionnaireApp.chaine.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-chaine"
+        [routerLink]="['/chaine/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sopraTranslate="portailGestionnaireApp.chaine.home.createLabel"> Create a new Chaine </span>
+      </button>
+    </div>
+  </h2>
+
+  <sopra-alert-error></sopra-alert-error>
+
+  <sopra-alert></sopra-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="chaines?.length === 0">
+    <span sopraTranslate="portailGestionnaireApp.chaine.home.notFound">No chaines found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="chaines && chaines.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span sopraTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span sopraTranslate="portailGestionnaireApp.chaine.libelle">Libelle</span></th>
+          <th scope="col"><span sopraTranslate="portailGestionnaireApp.chaine.process">Process</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let chaine of chaines; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/chaine', chaine.id, 'view']">{{ chaine.id }}</a>
+          </td>
+          <td>{{ chaine.libelle }}</td>
+          <td>{{ chaine.process }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/chaine', chaine.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sopraTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/chaine', chaine.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sopraTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(chaine)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sopraTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
