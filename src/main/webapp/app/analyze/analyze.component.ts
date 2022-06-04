@@ -57,9 +57,7 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
     console.log(this.selectedChaine, this.startDate, this.endDate);
     let fff = this.allFiles;
     if (this.selectedChaine && this.selectedChaine !== '') {
-      this.filtredFiles = this.allFiles.filter(
-        (a: IFile) => String(this.getType(a.type)).toLowerCase() === String(this.selectedChaine).toLowerCase()
-      );
+      fff = this.allFiles.filter((a: IFile) => String(this.getType(a.type)).toLowerCase() === String(this.selectedChaine).toLowerCase());
     }
     if (this.endDate && this.endDate !== '' && this.startDate && this.startDate !== '') {
       fff = this.allFiles.filter(
