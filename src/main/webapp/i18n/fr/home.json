@@ -1,11 +1,16 @@
 {
   "home": {
-    "title": "Bienvenue, Java Hipster !",
+    "title": "Portail Gestionnaire",
     "subtitle": "Ceci est votre page d'accueil",
+    "log": "Analyse Log ",
+
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."
     },
-    "question": "Si vous avez des questions à propos de JHipster :",
+    "article": {
+      "go": "Ouvrir article"
+    },
+    "question": "Si vous avez des questions :",
     "link": {
       "homepage": "Page d'accueil de JHipster",
       "stackoverflow": "JHipster sur Stack Overflow",

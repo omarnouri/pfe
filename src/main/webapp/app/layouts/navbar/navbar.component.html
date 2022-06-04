@@ -2,7 +2,7 @@
   <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
     <span class="logo-img"></span>
     <span sopraTranslate="global.title" class="navbar-title">PortailGestionnaire</span>
-    <span class="navbar-version">{{ version }}</span>
+    <span class="navbar-version"></span>
   </a>
   <a
     class="navbar-toggler d-lg-none"
@@ -28,7 +28,7 @@
       </li>
       <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
       <li
-        *ngSwitchCase="true"
+        *sopraHasAnyAuthority="'ROLE_ADMIN'"
         ngbDropdown
         class="nav-item dropdown pointer"
         display="dynamic"
@@ -205,12 +205,6 @@
             <a class="dropdown-item" (click)="login()" id="login" data-cy="login">
               <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
               <span sopraTranslate="global.menu.account.login">Sign in</span>
-            </a>
-          </li>
-          <li *ngSwitchCase="false">
-            <a class="dropdown-item" routerLink="account/register" routerLinkActive="active" (click)="collapseNavbar()" data-cy="register">
-              <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
-              <span sopraTranslate="global.menu.account.register">Register</span>
             </a>
           </li>
         </ul>

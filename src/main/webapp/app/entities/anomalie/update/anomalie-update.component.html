@@ -44,7 +44,7 @@
               [ngValue]="chaineOption.id === editForm.get('chaine')!.value?.id ? editForm.get('chaine')!.value : chaineOption"
               *ngFor="let chaineOption of chainesSharedCollection; trackBy: trackChaineById"
             >
-              {{ chaineOption.id }}
+              {{ chaineOption.id }} {{ chaineOption.libelle }}
             </option>
           </select>
         </div>

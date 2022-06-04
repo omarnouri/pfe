@@ -1,11 +1,15 @@
 {
   "home": {
-    "title": "Welcome, Java Hipster!",
+    "title": "Portail Gestionnaire",
     "subtitle": "This is your homepage",
+    "log": "Analysise Log ",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
-    "question": "If you have any question on JHipster:",
+    "article": {
+      "go": "Open article"
+    },
+    "question": "If you have any question:",
     "link": {
       "homepage": "JHipster homepage",
       "stackoverflow": "JHipster on Stack Overflow",
@@ -14,6 +18,7 @@
       "follow": "follow @jhipster on Twitter"
     },
     "like": "If you like JHipster, don't forget to give us a star on",
-    "github": "GitHub"
+    "github": "GitHub",
+    "LOG": "Analysis Log"
   }
 }

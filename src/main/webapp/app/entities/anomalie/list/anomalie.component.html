@@ -48,7 +48,7 @@
           <td>{{ anomalie.msgSol }}</td>
           <td>
             <div *ngIf="anomalie.chaine">
-              <a [routerLink]="['/chaine', anomalie.chaine?.id, 'view']">{{ anomalie.chaine?.id }}</a>
+              <a [routerLink]="['/chaine', anomalie.chaine?.id, 'view']">{{ anomalie.chaine?.id }} {{ anomalie.chaine?.libelle }}</a>
             </div>
           </td>
           <td class="text-right">

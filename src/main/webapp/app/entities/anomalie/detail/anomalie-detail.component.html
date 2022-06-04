@@ -25,7 +25,7 @@
         <dt><span sopraTranslate="portailGestionnaireApp.anomalie.chaine">Chaine</span></dt>
         <dd>
           <div *ngIf="anomalie.chaine">
-            <a [routerLink]="['/chaine', anomalie.chaine?.id, 'view']">{{ anomalie.chaine?.id }}</a>
+            <a [routerLink]="['/chaine', anomalie.chaine?.id, 'view']">{{ anomalie.chaine?.id }} {{ anomalie.chaine?.libelle }}</a>
           </div>
         </dd>
       </dl>

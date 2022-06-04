@@ -8,5 +8,6 @@ import { LoginComponent } from './login.component';
 @NgModule({
   imports: [SharedModule, RouterModule.forChild([LOGIN_ROUTE])],
   declarations: [LoginComponent],
+  exports: [LoginComponent],
 })
 export class LoginModule {}
