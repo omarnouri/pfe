@@ -1,0 +1,19 @@
+{
+  "portailGestionnaireApp": {
+    "analyze": {
+      "home": {
+        "title": "Analyze logs",
+        "selectChaine": "Select chaine",
+        "dates": "Select dates intervall",
+        "process": "Process",
+        "analyzeBtn": "Analyze",
+        "name": "Log",
+        "chaine": "Chaine",
+        "type": "Chaine",
+        "size": "Taille",
+        "updateDate": "Derniere modification",
+        "byte": "Octets"
+      }
+    }
+  }
+}

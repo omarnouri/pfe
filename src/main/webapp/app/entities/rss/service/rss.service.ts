@@ -16,12 +16,6 @@ export class RssService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  getfiles(req?: any): Observable<HttpResponse<any[]>> {
-    const url = this.applicationConfigService.getEndpointFor('api/files');
-    const options = createRequestOption(req);
-    return this.http.get<any[]>(url, { params: options, observe: 'response' });
-  }
-
   create(rss: IRss): Observable<EntityResponseType> {
     return this.http.post<IRss>(this.resourceUrl, rss, { observe: 'response' });
   }

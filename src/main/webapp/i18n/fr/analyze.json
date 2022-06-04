@@ -1,0 +1,35 @@
+{
+  "portailGestionnaireApp": {
+    "analyze": {
+      "home": {
+        "title": "Analyse logs",
+        "selectChaine": "Selectionner la chaine",
+        "dates": "Selectionner l'intervalle des dates",
+        "process": "Process",
+        "name": "Log",
+        "type": "Chaine",
+        "chaine": "Chaine",
+        "analyzeBtn": "Analyser",
+        "size": "Taille",
+        "updateDate": "Derniere modification",
+        "byte": "Octets",
+        "createLabel": "Créer un nouveau Analyse",
+        "createOrEditLabel": "Créer ou éditer un Analyse",
+        "notFound": "Aucun Analyse trouvé"
+      },
+      "created": "Un nouveau Analyse a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Analyse avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Analyse avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Analyse {{ id }} ?"
+      },
+      "detail": {
+        "title": "Analyse"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "process": "Process",
+      "anomalie": "Anomalie"
+    }
+  }
+}

@@ -36,10 +36,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(account => {
         this.account = account;
       });
-    this.rssService.getfiles().subscribe((res: any) => {
-      console.log(res);
-      console.log('res');
-    });
     this.rssService.query().subscribe((response: HttpResponse<Rss[]>) => {
       if (response.ok && response.body) {
         this.fluxRss = response.body;

@@ -21,7 +21,7 @@ public class FilesController {
     }
 
     @GetMapping("/files")
-    public List<LogFile> getAllRsses() {
+    public List<LogFile> getAllFiles() {
         log.debug("REST request to get all files");
         return ftpService.getList();
     }

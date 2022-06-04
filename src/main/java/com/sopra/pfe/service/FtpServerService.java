@@ -23,7 +23,7 @@ public class FtpServerService {
         List<LogFile> result = new ArrayList<>();
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isFile()) {
-                result.add(new LogFile(fileEntry.getName(), fileEntry.getTotalSpace(), fileEntry.getName(), fileEntry.lastModified()));
+                result.add(new LogFile(fileEntry.getName(), fileEntry.length(), fileEntry.getName(), fileEntry.lastModified()));
             }
         }
         return result;
