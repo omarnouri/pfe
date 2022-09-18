@@ -1,6 +1,7 @@
 package com.sopra.pfe.repository;
 
 import com.sopra.pfe.domain.Anomalie;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface AnomalieRepository extends JpaRepository<Anomalie, Long> {}
+public interface AnomalieRepository extends JpaRepository<Anomalie, Long> {
+    List<Anomalie> findByChaine_Id(Long chaineId);
+}

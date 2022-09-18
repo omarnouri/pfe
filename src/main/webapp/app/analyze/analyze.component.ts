@@ -5,8 +5,12 @@ import { Subject } from 'rxjs';
 import { FileService } from './file.service';
 import { IFile } from './file.model';
 import { HttpResponse } from '@angular/common/http';
-import { Chaine, IChaine } from 'app/entities/chaine/chaine.model';
+import { IChaine } from 'app/entities/chaine/chaine.model';
 import { ChaineService } from 'app/entities/chaine/service/chaine.service';
+import { IAnomalie } from 'app/entities/anomalie/anomalie.model';
+
+/* eslint-disable */
+declare const Swal: any;
 
 @Component({
   selector: 'sopra-analyze',
@@ -93,7 +97,45 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     return `${Math.round(bytes / Math.pow(1024, i))} ${sizes[i]}`;
   }
+  getChaineId(chaine: string): number {
+    return this.chaines.find((el: IChaine) => el.libelle === chaine)?.id ?? 0;
+  }
   analyser(file: IFile): void {
+    this.fileService.analyzer(file?.name, this.getChaineId(this.getType(file.name))).subscribe(
+      (response: HttpResponse<IAnomalie[]>) => {
+        console.log(response);
+        if (response.body?.length === 0) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Valide',
+            text: 'Aucune anomalie detecté',
+          });
+        } else {
+          let html = '';
+          let index = 1;
+          response.body?.forEach((anomalie: IAnomalie) => {
+            html += `<b class="info">${index}</b>: `;
+            html += `<b>${anomalie.msgSol}</b><br>`;
+            index++;
+          });
+          Swal.fire({
+            icon: 'error',
+            html: html,
+          });
+        }
+        this.isLoading = false;
+      },
+      error => {
+        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Probléme au serveur...',
+          text: `${error.statusText} !`,
+          footer: `<a href="${error.url}">Why do I have this issue?</a>`,
+        });
+        this.isLoading = false;
+      }
+    );
     this.isLoading = true;
   }
 }
