@@ -5,6 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { LANGUAGES } from 'app/config/language.constants';
 import { User } from '../user-management.model';
 import { UserManagementService } from '../service/user-management.service';
+import { ClientService } from 'app/entities/client/service/client.service';
+import { IClient } from 'app/entities/client/client.model';
+import { HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'sopra-user-mgmt-update',
@@ -14,6 +18,7 @@ export class UserManagementUpdateComponent implements OnInit {
   user!: User;
   languages = LANGUAGES;
   authorities: string[] = [];
+  clients!: IClient[];
   isSaving = false;
 
   editForm = this.fb.group({
@@ -33,9 +38,15 @@ export class UserManagementUpdateComponent implements OnInit {
     activated: [],
     langKey: [],
     authorities: [],
+    client: [],
   });
 
-  constructor(private userService: UserManagementService, private route: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    private userService: UserManagementService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private clientService: ClientService
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(({ user }) => {
@@ -45,13 +56,19 @@ export class UserManagementUpdateComponent implements OnInit {
           this.user.activated = true;
         }
         this.updateForm(user);
+        this.loadRelationshipsOptions();
       }
     });
     this.userService.authorities().subscribe(authorities => (this.authorities = authorities));
+    this.clientService.query().subscribe(res => (this.clients = res.body ?? []));
   }
 
   previousState(): void {
     window.history.back();
+  }
+
+  trackClientById(index: number, item: IClient): number {
+    return item.id!;
   }
 
   save(): void {
@@ -69,6 +86,13 @@ export class UserManagementUpdateComponent implements OnInit {
       );
     }
   }
+  protected loadRelationshipsOptions(): void {
+    this.clientService
+      .query()
+      .pipe(map((res: HttpResponse<IClient[]>) => res.body ?? []))
+      .pipe(map((clients: IClient[]) => this.clientService.addClientToCollectionIfMissing(clients, this.editForm.get('client')!.value)))
+      .subscribe((clients: IClient[]) => (this.clients = clients));
+  }
 
   private updateForm(user: User): void {
     this.editForm.patchValue({
@@ -80,7 +104,9 @@ export class UserManagementUpdateComponent implements OnInit {
       activated: user.activated,
       langKey: user.langKey,
       authorities: user.authorities,
+      client: user.client,
     });
+    this.clients = this.clientService.addClientToCollectionIfMissing(this.clients, user.client);
   }
 
   private updateUser(user: User): void {

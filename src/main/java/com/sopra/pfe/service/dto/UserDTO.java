@@ -1,5 +1,6 @@
 package com.sopra.pfe.service.dto;
 
+import com.sopra.pfe.domain.Client;
 import com.sopra.pfe.domain.User;
 
 /**
@@ -11,6 +12,8 @@ public class UserDTO {
 
     private String login;
 
+    private Client client;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -18,6 +21,7 @@ public class UserDTO {
     public UserDTO(User user) {
         this.id = user.getId();
         // Customize it here if you need, or not, firstName/lastName/etc
+        this.client = user.getClient();
         this.login = user.getLogin();
     }
 
@@ -35,6 +39,14 @@ public class UserDTO {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     // prettier-ignore

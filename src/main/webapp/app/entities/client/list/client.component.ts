@@ -23,6 +23,7 @@ export class ClientComponent implements OnInit {
       (res: HttpResponse<IClient[]>) => {
         this.isLoading = false;
         this.clients = res.body ?? [];
+        console.log('clients', this.clients);
       },
       () => {
         this.isLoading = false;

@@ -2,6 +2,7 @@ package com.sopra.pfe.service.dto;
 
 import com.sopra.pfe.config.Constants;
 import com.sopra.pfe.domain.Authority;
+import com.sopra.pfe.domain.Client;
 import com.sopra.pfe.domain.User;
 import java.time.Instant;
 import java.util.Set;
@@ -48,6 +49,8 @@ public class AdminUserDTO {
 
     private Set<String> authorities;
 
+    private Client client;
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -65,6 +68,7 @@ public class AdminUserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.client = user.getClient();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
     }
 
@@ -162,6 +166,14 @@ public class AdminUserDTO {
 
     public void setLastModifiedDate(Instant lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Set<String> getAuthorities() {

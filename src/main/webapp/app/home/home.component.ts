@@ -9,6 +9,7 @@ import { RssService } from 'app/entities/rss/service/rss.service';
 import { Rss } from 'app/entities/rss/rss.model';
 import { HttpResponse } from '@angular/common/http';
 import { IArticle } from './article.model';
+import { ClientService } from 'app/entities/client/service/client.service';
 
 @Component({
   selector: 'sopra-home',
@@ -22,7 +23,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private accountService: AccountService, private router: Router, private rssService: RssService) {}
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private rssService: RssService,
+    private clientService: ClientService
+  ) {}
 
   ngOnInit(): void {
     this.accountService
@@ -30,6 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => {
         this.account = account;
+        /* eslint-disable no-console */
+        console.log('account', account);
       });
     this.rssService.query().subscribe((response: HttpResponse<Rss[]>) => {
       if (response.ok && response.body) {

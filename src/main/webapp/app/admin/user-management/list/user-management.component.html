@@ -24,6 +24,9 @@
           <th scope="col" sopraSortBy="id"><span sopraTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" sopraSortBy="login"><span sopraTranslate="userManagement.login">Login</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" sopraSortBy="email"><span sopraTranslate="userManagement.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" sopraSortBy="client">
+            <span sopraTranslate="portailGestionnaireApp.client.detail.title">Client</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
           <th scope="col" sopraSortBy="langKey">
             <span sopraTranslate="userManagement.langKey">Lang Key</span> <fa-icon icon="sort"></fa-icon>
@@ -48,6 +51,7 @@
           </td>
           <td>{{ user.login }}</td>
           <td>{{ user.email }}</td>
+          <td><img width="75" [src]="user.client?.logo" />{{ user.client?.nameCl }}</td>
           <td>
             <button
               class="btn btn-danger btn-sm"
