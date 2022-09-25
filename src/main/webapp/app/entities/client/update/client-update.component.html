@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sopra-client-heading"
+        data-cy="ClientCreateUpdateHeading"
+        sopraTranslate="portailGestionnaireApp.client.home.createOrEditLabel"
+      >
+        Create or edit a Client
+      </h2>
+
+      <div>
+        <sopra-alert-error></sopra-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" sopraTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" sopraTranslate="portailGestionnaireApp.client.nameCl" for="field_nameCl">Name Cl</label>
+          <input type="text" class="form-control" name="nameCl" id="field_nameCl" data-cy="nameCl" formControlName="nameCl" />
+          <div *ngIf="editForm.get('nameCl')!.invalid && (editForm.get('nameCl')!.dirty || editForm.get('nameCl')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nameCl')?.errors?.required"
+              sopraTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" sopraTranslate="portailGestionnaireApp.client.logo" for="field_logo">Logo</label>
+          <input type="text" class="form-control" name="logo" id="field_logo" data-cy="logo" formControlName="logo" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" sopraTranslate="portailGestionnaireApp.client.pathLogs" for="field_pathLogs">Path Logs</label>
+          <input type="text" class="form-control" name="pathLogs" id="field_pathLogs" data-cy="pathLogs" formControlName="pathLogs" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" sopraTranslate="portailGestionnaireApp.client.type" for="field_type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+        </div>
+
+        <div class="form-group">
+          <label sopraTranslate="portailGestionnaireApp.client.rsses" for="field_rsses">Rsses</label>
+          <select class="form-control" id="field_rsses" data-cy="rsses" multiple name="rsses" formControlName="rsses">
+            <option
+              [ngValue]="getSelectedRss(rssOption, editForm.get('rsses')!.value)"
+              *ngFor="let rssOption of rssesSharedCollection; trackBy: trackRssById"
+            >
+              {{ rssOption.titre }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sopraTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sopraTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

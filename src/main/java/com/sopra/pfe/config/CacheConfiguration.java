@@ -52,6 +52,8 @@ public class CacheConfiguration {
             createCache(cm, com.sopra.pfe.domain.Chaine.class.getName());
             createCache(cm, com.sopra.pfe.domain.Chaine.class.getName() + ".anomalies");
             createCache(cm, com.sopra.pfe.domain.Anomalie.class.getName());
+            createCache(cm, com.sopra.pfe.domain.Client.class.getName());
+            createCache(cm, com.sopra.pfe.domain.Client.class.getName() + ".rsses");
             // jhipster-needle-ehcache-add-entry
         };
     }

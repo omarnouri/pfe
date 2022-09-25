@@ -34,7 +34,7 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "applicationIndex": 0,
-    "entities": ["Rss", "Chaine", "Anomalie"],
+    "entities": ["Rss", "Chaine", "Anomalie", "Client"],
     "skipCheckLengthOfIdentifier": false,
     "skipFakeData": false,
     "blueprints": [],
@@ -44,6 +44,6 @@
     "creationTimestamp": 1649600749100,
     "jwtSecretKey": "OTFiMjJjMWFiYTNlODIxMzU0NzA4OTY1MDE1ZDYwMTFiNTQ5ZDlmZDc5Mzk3YzQzYTMxOGEyNWY0ZDk0Y2U5OWRjZWJmZTNjMWY5MzI0NTNkZDYwNGI0MGU2M2E0YzVlOWI4ODM4ZDA5MzI1ZmE5Y2MwOWU1NDNmNjA2Y2Y5NTA=",
     "devServerPort": 4200,
-    "lastLiquibaseTimestamp": 1649600929000
+    "lastLiquibaseTimestamp": 1664114816000
   }
 }

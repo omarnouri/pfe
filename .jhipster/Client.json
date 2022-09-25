@@ -1,0 +1,38 @@
+{
+  "fields": [
+    {
+      "fieldName": "nameCl",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "logo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pathLogs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "rsses",
+      "otherEntityName": "rss",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "titre",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "clients"
+    }
+  ],
+  "service": "serviceClass",
+  "dto": "no",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Client",
+  "changelogDate": "20220925140656"
+}

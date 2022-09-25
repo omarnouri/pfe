@@ -8,6 +8,7 @@ import { Account } from 'app/core/auth/account.model';
 import { RssService } from 'app/entities/rss/service/rss.service';
 import { Rss } from 'app/entities/rss/rss.model';
 import { HttpResponse } from '@angular/common/http';
+import { IArticle } from './article.model';
 
 @Component({
   selector: 'sopra-home',
@@ -17,13 +18,7 @@ import { HttpResponse } from '@angular/common/http';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   fluxRss: Rss[] = [];
-  articles: any[] = [];
-  articleTemp = {
-    description: 'TETKE?TGKDF?KGDFKS?DFKSDF',
-    title: 'titre',
-    pubDate: 'date ',
-    link: 'url',
-  };
+  articles: IArticle[] = [];
 
   private readonly destroy$ = new Subject<void>();
 
