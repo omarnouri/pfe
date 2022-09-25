@@ -1,6 +1,7 @@
 package com.sopra.pfe.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sopra.pfe.config.Constants;
 import java.io.Serializable;
 import java.time.Instant;
@@ -91,6 +92,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "clients" }, allowSetters = true)
+    private Client client;
 
     public Long getId() {
         return id;
@@ -195,6 +200,19 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Client getClient() {
+        return this.client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public User client(Client client) {
+        this.setClient(client);
+        return this;
     }
 
     @Override

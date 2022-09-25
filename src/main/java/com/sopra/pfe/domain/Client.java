@@ -1,5 +1,6 @@
 package com.sopra.pfe.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,6 +45,11 @@ public class Client implements Serializable {
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Rss> rsses = new HashSet<>();
+
+    @OneToMany(mappedBy = "client")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "client" }, allowSetters = true)
+    private Set<User> users = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -132,6 +138,37 @@ public class Client implements Serializable {
 
     public Client removeRsses(Rss rss) {
         this.rsses.remove(rss);
+        return this;
+    }
+
+    public Set<User> getUsers() {
+        return this.users;
+    }
+
+    public void setUsers(Set<User> users) {
+        if (this.users != null) {
+            this.users.forEach(i -> i.setClient(null));
+        }
+        if (users != null) {
+            users.forEach(i -> i.setClient(this));
+        }
+        this.users = users;
+    }
+
+    public Client users(Set<User> users) {
+        this.setUsers(users);
+        return this;
+    }
+
+    public Client addUser(User user) {
+        this.users.add(user);
+        user.setClient(this);
+        return this;
+    }
+
+    public Client removeUser(User user) {
+        this.users.remove(user);
+        user.setClient(null);
         return this;
     }
 

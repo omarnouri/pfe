@@ -47,7 +47,7 @@
             <a [routerLink]="['/client', client.id, 'view']">{{ client.id }}</a>
           </td>
           <td>{{ client.nameCl }}</td>
-          <td>{{ client.logo }}</td>
+          <td><img width="250" [src]="client.logo" /></td>
           <td>{{ client.pathLogs }}</td>
           <td>{{ client.type }}</td>
           <td>
