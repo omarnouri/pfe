@@ -117,6 +117,7 @@ export class UserManagementUpdateComponent implements OnInit {
     user.activated = this.editForm.get(['activated'])!.value;
     user.langKey = this.editForm.get(['langKey'])!.value;
     user.authorities = this.editForm.get(['authorities'])!.value;
+    user.client = this.editForm.get(['client'])!.value;
   }
 
   private onSaveSuccess(): void {

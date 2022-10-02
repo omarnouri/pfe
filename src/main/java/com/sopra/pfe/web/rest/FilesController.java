@@ -26,17 +26,16 @@ public class FilesController {
     }
 
     @GetMapping("/files")
-    public List<LogFile> getAllFiles() {
-        log.debug("REST request to get all files");
-        return ftpService.getList();
+    public List<LogFile> getAllFiles(@RequestParam String path) {
+        log.debug("REST request to get all files by path");
+        return ftpService.getList(path);
     }
 
     @GetMapping("/files/analyze")
-    public List<Anomalie> analyze(@RequestParam String fileName, @RequestParam Long chaineId) {
-        log.debug("REST request to get all files");
+    public List<Anomalie> analyze(@RequestParam String path, @RequestParam String fileName, @RequestParam Long chaineId) {
         List<Anomalie> anomalies = null;
         anomalies = anomalieRepository.findByChaine_Id(chaineId);
         log.debug("REST request to analyze a file", anomalies);
-        return ftpService.analyzeFile(fileName, anomalies);
+        return ftpService.analyzeFile(path, fileName, anomalies);
     }
 }

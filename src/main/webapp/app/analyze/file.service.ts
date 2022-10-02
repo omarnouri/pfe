@@ -13,12 +13,14 @@ export class FileService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  getfiles(req?: any): Observable<HttpResponse<IFile[]>> {
+  getfilesByPath(req?: any): Observable<HttpResponse<IFile[]>> {
     const options = createRequestOption(req);
     return this.http.get<IFile[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
-  analyzer(fileName: string | undefined, chaineId: number): Observable<HttpResponse<IAnomalie[]>> {
+
+  analyzer(path: string | null | undefined, fileName: string | undefined, chaineId: number): Observable<HttpResponse<IAnomalie[]>> {
     const options = createRequestOption({
+      path,
       fileName,
       chaineId,
     });

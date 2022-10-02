@@ -8,6 +8,9 @@ import { HttpResponse } from '@angular/common/http';
 import { IChaine } from 'app/entities/chaine/chaine.model';
 import { ChaineService } from 'app/entities/chaine/service/chaine.service';
 import { IAnomalie } from 'app/entities/anomalie/anomalie.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { takeUntil } from 'rxjs/operators';
+import { IClient } from 'app/entities/client/client.model';
 
 /* eslint-disable */
 declare const Swal: any;
@@ -25,9 +28,10 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   selectedChaine?: string;
   startDate?: string;
   endDate?: string;
+  client?: IClient;
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private router: Router, private fileService: FileService, private chaineService: ChaineService) {}
+  constructor(private accountService: AccountService, private fileService: FileService, private chaineService: ChaineService) {}
 
   loadAllChaine(): void {
     this.isLoading = true;
@@ -44,12 +48,19 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadAllChaine();
-    this.fileService.getfiles().subscribe((response: HttpResponse<IFile[]>) => {
-      this.allFiles = response.body ?? [];
-      this.filtredFiles = response.body ?? [];
-      console.log(response);
-    });
+    this.accountService
+      .getAuthenticationState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(account => {
+        const client = account?.client;
+        this.client = (client as IClient) || undefined;
+        this.loadAllChaine();
+        this.fileService.getfilesByPath({ path: client?.pathLogs }).subscribe((response: HttpResponse<IFile[]>) => {
+          this.allFiles = response.body ?? [];
+          this.filtredFiles = response.body ?? [];
+          console.log(response);
+        });
+      });
   }
 
   ngOnDestroy(): void {
@@ -101,7 +112,7 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
     return this.chaines.find((el: IChaine) => el.libelle === chaine)?.id ?? 0;
   }
   analyser(file: IFile): void {
-    this.fileService.analyzer(file?.name, this.getChaineId(this.getType(file.name))).subscribe(
+    this.fileService.analyzer(this.client?.pathLogs, file?.name, this.getChaineId(this.getType(file.name))).subscribe(
       (response: HttpResponse<IAnomalie[]>) => {
         console.log(response);
         if (response.body?.length === 0) {

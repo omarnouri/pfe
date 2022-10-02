@@ -15,12 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class FtpServerService {
 
-    private String PATH = "d:\\Profiles\\onouri\\Desktop\\Jira\\PFE Omar ING4F\\Liste des logs\\Analyse CAA";
     private final Logger log = LoggerFactory.getLogger(FtpServerService.class);
 
-    final File folder = new File(PATH);
-
-    public List<LogFile> getList() {
+    public List<LogFile> getList(String path) {
+        path = validatePath(path);
+        File folder = new File(path);
         List<LogFile> result = new ArrayList<>();
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isFile()) {
@@ -30,13 +29,14 @@ public class FtpServerService {
         return result;
     }
 
-    public List<Anomalie> analyzeFile(String fileName, List<Anomalie> anomalies) {
+    public List<Anomalie> analyzeFile(String path, String fileName, List<Anomalie> anomalies) {
         log.warn("++++++ " + anomalies);
         List<Anomalie> anomaliesResult = new ArrayList();
         boolean estAnormal = false;
         BufferedReader reader;
+        String filePath = validatePath(path + "\\" + fileName);
         try {
-            reader = new BufferedReader(new FileReader(PATH + "\\" + fileName));
+            reader = new BufferedReader(new FileReader(filePath));
             String line = reader.readLine();
             while (line != null) {
                 if (line.toLowerCase().contains("anormale")) {
@@ -85,5 +85,17 @@ public class FtpServerService {
             return anomalies.get(i);
         }
         return null;
+    }
+
+    private String validatePath(String path) {
+        String newPath = null;
+        String OSName = System.getProperty("os.name");
+        if (OSName.toUpperCase().contains("WINDOWS")) {
+            newPath = path.replace("\\", "\\\\");
+        } else if (OSName != null) {
+            newPath = path.replace("\\", "/");
+            newPath = path.replace("//", "/");
+        }
+        return newPath;
     }
 }

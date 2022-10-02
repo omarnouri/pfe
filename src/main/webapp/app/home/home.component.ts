@@ -10,6 +10,7 @@ import { Rss } from 'app/entities/rss/rss.model';
 import { HttpResponse } from '@angular/common/http';
 import { IArticle } from './article.model';
 import { ClientService } from 'app/entities/client/service/client.service';
+import { Client, IClient } from 'app/entities/client/client.model';
 
 @Component({
   selector: 'sopra-home',
@@ -36,18 +37,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => {
         this.account = account;
-        /* eslint-disable no-console */
-        console.log('account', account);
+        const clientId = account?.client?.id;
+        if (clientId && account) {
+          this.clientService.find(clientId).subscribe((res: HttpResponse<Client>) => {
+            const clientWithRsses = res.body;
+            account.client = clientWithRsses;
+            this.account = account;
+            this.fluxRss = this.account?.client?.rsses ?? [];
+            this.transformXmlData();
+          });
+        }
       });
-    this.rssService.query().subscribe((response: HttpResponse<Rss[]>) => {
-      if (response.ok && response.body) {
-        this.fluxRss = response.body;
-        this.transformXmlData();
-      } else {
-        /* eslint-disable no-console */
-        console.error(response);
-      }
-    });
   }
 
   transformXmlData(): any {
